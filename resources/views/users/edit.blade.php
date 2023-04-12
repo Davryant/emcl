@@ -48,6 +48,12 @@
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
+            <strong>Location:</strong>
+            {!! Form::text('location', null, array('placeholder' => 'Location','class' => 'form-control')) !!}
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group">
             <strong>Password:</strong>
             {!! Form::password('password', array('placeholder' => 'Password','class' => 'form-control')) !!}
         </div>
@@ -61,14 +67,14 @@
 
 
     
-    <div class="form-group">
+    <div class="col-xs-12 col-sm-12 col-md-12">
         {!! Form::label('roles', 'Roles', array('class' => 'd-block')) !!}
      
      </div>
      <br>
      
      
-     
+     <div class="col-xs-12 col-sm-12 col-md-12">
      <div class="row">
             @foreach($roles as $role)
                 <div class="form-group col-lg-4 col-md-4 col-12">
@@ -77,6 +83,7 @@
                 </div>
             @endforeach
      </div>
+    </div>
 
 
     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
