@@ -1,0 +1,88 @@
+@extends('layouts.app')
+
+
+@section('content')
+<div class="row">
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left">
+            <h2>Edit New User</h2>
+        </div>
+        <div class="pull-right">
+            <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>
+        </div>
+    </div>
+</div>
+
+
+@if (count($errors) > 0)
+  <div class="alert alert-danger">
+    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+    <ul>
+       @foreach ($errors->all() as $error)
+         <li>{{ $error }}</li>
+       @endforeach
+    </ul>
+  </div>
+@endif
+
+
+{!! Form::model($user, ['method' => 'PATCH','route' => ['users.update', $user->id]]) !!}
+
+{{-- {!! Form::model($user, [
+    'method' => 'PATCH',
+    'url' => ['auth/users', $user->id],
+    'role' => 'form'
+]) !!} --}}
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group">
+            <strong>Name:</strong>
+            {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group">
+            <strong>Email:</strong>
+            {!! Form::text('email', null, array('placeholder' => 'Email','class' => 'form-control')) !!}
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group">
+            <strong>Password:</strong>
+            {!! Form::password('password', array('placeholder' => 'Password','class' => 'form-control')) !!}
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group">
+            <strong>Confirm Password:</strong>
+            {!! Form::password('confirm-password', array('placeholder' => 'Confirm Password','class' => 'form-control')) !!}
+        </div>
+    </div>
+
+
+    
+    <div class="form-group">
+        {!! Form::label('roles', 'Roles', array('class' => 'd-block')) !!}
+     
+     </div>
+     <br>
+     
+     
+     
+     <div class="row">
+            @foreach($roles as $role)
+                <div class="form-group col-lg-4 col-md-4 col-12">
+                    <input type="checkbox" name="roles[]"
+                           id="roles{{ $role->id }}" value="{{ $role->id }}" {{in_array($role->id, $userRoles) ? 'checked': ''}}>&nbsp; {{$role->name}}
+                </div>
+            @endforeach
+     </div>
+
+
+    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</div>
+{!! Form::close() !!}
+
+@endsection
